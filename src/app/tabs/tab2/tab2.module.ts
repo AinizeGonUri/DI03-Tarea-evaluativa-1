@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Tab2Page } from './tab2.page';
-// import { ExploreContainerComponentModule } from '../../explore-container/explore-container.module';
+import { ExploreContainerComponentModule } from '../../shared/explore-container/explore-container.module';
 
 import { Tab2PageRoutingModule } from './tab2-routing.module';
 
@@ -14,7 +14,7 @@ import { ComponentesModule } from 'src/app/shared/componentes/componentes.module
     IonicModule,
     CommonModule,
     FormsModule,
-    // ExploreContainerComponentModule,
+    ExploreContainerComponentModule,
     Tab2PageRoutingModule,
     ComponentesModule
   ],

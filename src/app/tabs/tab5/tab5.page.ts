@@ -20,19 +20,19 @@ export class Tab5Page implements OnInit {
   valoresLista: IValor[] = [
     {
       imagen: "BIRT_LOGO.png",
-      url: "https://birt.eus",
+      url: "birt.eus",
     },
     {
       imagen: "easo_logo.png",
-      url: "https://easo.hezkuntza.net",
+      url: "easo.hezkuntza.net",
     },
     {
       imagen: "nicolas_larburu_logo.jpg",
-      url: "https://nlarburu.hezkuntza.net",
+      url: "nlarburu.hezkuntza.net",
     },
     {
       imagen: "ciudad_jardin_logo.png",
-      url: "https://ciudadjardin.hezkuntza.net",
+      url: "ciudadjardin.hezkuntza.net",
     }
   ];
 

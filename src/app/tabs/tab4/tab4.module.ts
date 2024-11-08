@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { Tab4PageRoutingModule } from './tab4-routing.module';
 
 import { Tab4Page } from './tab4.page';
-// import { ExploreContainerComponentModule } from '../../explore-container/explore-container.module';
+import { ExploreContainerComponentModule } from '../../shared/explore-container/explore-container.module';
 
 import { ComponentesModule } from 'src/app/shared/componentes/componentes.module';
 
@@ -16,7 +16,7 @@ import { ComponentesModule } from 'src/app/shared/componentes/componentes.module
     CommonModule,
     FormsModule,
     IonicModule,
-    // ExploreContainerComponentModule,
+    ExploreContainerComponentModule,
     Tab4PageRoutingModule,
     ComponentesModule
   ],

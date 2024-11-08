@@ -14,8 +14,7 @@
   <app-explore-container name="Tab 5 page"></app-explore-container>
   <ion-list>
     <ion-item *ngFor="let valor of valoresLista" [href]="valor.url">
-      <ion-img slot="start" [src]="'assets/img/' + valor.imagen"></ion-img>
-      {{ valor.url }}
+      <ion-img slot="start" [src]="'assets/img/' + valor.imagen" style="max-width: 20%;"></ion-img>
     </ion-item>
   </ion-list>
 </ion-content>

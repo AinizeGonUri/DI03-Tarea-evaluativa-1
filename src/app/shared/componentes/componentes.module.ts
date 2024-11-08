@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderTabComponent } from './header-tab/header-tab.component';
+import { IonicModule } from '@ionic/angular';
 
-import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 
 
 
@@ -11,10 +11,11 @@ import { ExploreContainerComponent } from '../explore-container/explore-containe
     HeaderTabComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    IonicModule
   ],
   exports: [
-    ExploreContainerComponent
+    HeaderTabComponent
   ]
 })
 export class ComponentesModule { }
