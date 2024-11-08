@@ -14,23 +14,20 @@
   <app-explore-container name="Tab 4 page"></app-explore-container>
 </ion-content>
 
-<ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Adivina el número
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-  <ion-item>
-    <ion-label position="floating">Introduce un número entre 0 y 100</ion-label>
-    <ion-input type="number" [(ngModel)]="gameState.userInput"></ion-input>
-  </ion-item>
-
-  <ion-button expand="full" (click)="checkGuess()">Comprobar</ion-button>
-
-  <ion-text color="primary" class="message">
-    <p>{{ gameState.message }}</p>
-  </ion-text>
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>
+        Adivina un número del 0 al 100
+      </ion-title>
+      <ion-item>
+        <ion-label position="floating">Introduce un número entre 0 y 100</ion-label>
+        <ion-input type="number" [(ngModel)]="gameState.userInput"></ion-input>
+      </ion-item>
+      <ion-text color="primary" class="message">
+        <p>{{ gameState.message }}</p>
+      </ion-text>
+      <ion-button expand="full" (click)="checkGuess()" style="width: 20%;">Comprobar</ion-button>
+    </ion-toolbar>
+  </ion-header>
 </ion-content>

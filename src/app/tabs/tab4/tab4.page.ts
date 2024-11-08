@@ -16,7 +16,6 @@ export class Tab4Page implements OnInit {
   gameState: IGameState;
 
   constructor() {
-    // Inicializamos el estado del juego
     this.gameState = {
       numberToGuess: 0,
       userInput: 0,
@@ -25,11 +24,9 @@ export class Tab4Page implements OnInit {
   }
 
   ngOnInit() {
-    // Generamos un número aleatorio al cargar la página
-    this.gameState.numberToGuess = Math.floor(Math.random() * 101); // Número aleatorio entre 0 y 100
+    this.gameState.numberToGuess = Math.floor(Math.random() * 101); 
   }
 
-  // Método que se ejecuta cuando el usuario hace clic en el botón
   checkGuess() {
     const { numberToGuess, userInput } = this.gameState;
 
