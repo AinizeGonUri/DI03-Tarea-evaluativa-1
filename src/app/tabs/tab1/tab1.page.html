@@ -7,28 +7,25 @@
 </ion-header>
 
 <ion-content>
-  <!-- Mostrar mensaje si no hay artículos -->
   <div *ngIf="articulos.length === 0">
     <ion-text>
       <h2>No hay artículos disponibles</h2>
     </ion-text>
   </div>
 
-  <!-- Mostrar artículos si están disponibles -->
-    <!-- Lista de artículos -->
-    <ion-list>
-      <ion-item class="card-wrapper" *ngFor="let articulo of articulos">
-        <div class="checkbox-wrapper">
-          <ion-checkbox [(ngModel)]="articulo.selected" (ionChange)="actualizarArticulo(articulo)"></ion-checkbox>
+  <ion-list>
+    <ion-item class="card-wrapper" *ngFor="let articulo of articulos">
+      <div class="checkbox-wrapper">
+        <ion-checkbox [(ngModel)]="articulo.selected" (ionChange)="actualizarArticulo(articulo)"></ion-checkbox>
+      </div>
+      <div class="content-wrapper">
+        <div class="info-wrapper">
+          <p>{{ articulo.title }}</p>
         </div>
-        <div class="content-wrapper">
-          <div class="info-wrapper">
-            <p>{{ articulo.title }}</p>
-          </div>
-          <div class="button-wrapper">
-            <ion-button color="danger" (click)="mostrarAlertaConfirmacion(articulo)">Borrar de la lista</ion-button>
-          </div>
+        <div class="button-wrapper">
+          <ion-button color="danger" (click)="mostrarAlertaConfirmacion(articulo)">Borrar de la lista</ion-button>
         </div>
-      </ion-item>
-    </ion-list>
+      </div>
+    </ion-item>
+  </ion-list>
 </ion-content>

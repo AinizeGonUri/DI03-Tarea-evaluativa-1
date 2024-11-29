@@ -1,3 +1,5 @@
+// Archivo encargado de la gestión de la tab2. 
+
 import { Component, OnInit } from '@angular/core';
 import { LecturaService } from '../../services/lectura.service';
 import { Articulo } from '../../interfaces/articulo.model';
@@ -15,13 +17,13 @@ export class Tab2Page implements OnInit {
   ) {}
 
   ngOnInit() {
-    // Nos suscribimos al observable de artículos seleccionados
+    // A traves del servicio lecturaService, cargamos los artículos que estén seleccionados al cargar la página
     this.lecturaService.getArticulosSeleccionados().subscribe((articulos: Articulo[]) => {
-      console.log(articulos);
       this.articulosSeleccionados = articulos;
     });
   }
 
+  // Método para borrar los artículos que el usuario quiera borrar
   borrarArticulo(articulo: Articulo) {
     this.lecturaService.borrarArticulo(articulo);
   }
