@@ -8,6 +8,7 @@ import { ExploreContainerComponentModule } from '../../shared/explore-container/
 import { Tab2PageRoutingModule } from './tab2-routing.module';
 
 import { ComponentesModule } from 'src/app/shared/componentes/componentes.module';
+import { ArticuloCardComponent } from '../../components/articulo-card/articulo-card.component';  // Importamos el componente aquí
 
 @NgModule({
   imports: [
@@ -18,6 +19,6 @@ import { ComponentesModule } from 'src/app/shared/componentes/componentes.module
     Tab2PageRoutingModule,
     ComponentesModule
   ],
-  declarations: [Tab2Page]
+  declarations: [Tab2Page, ArticuloCardComponent]
 })
 export class Tab2PageModule {}

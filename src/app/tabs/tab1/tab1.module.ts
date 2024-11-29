@@ -8,6 +8,9 @@ import { ExploreContainerComponentModule } from '../../shared/explore-container/
 import { Tab1PageRoutingModule } from './tab1-routing.module';
 import { ComponentesModule } from '../../shared/componentes/componentes.module';
 
+import { HttpClientModule } from '@angular/common/http';  // Importa HttpClientModule
+
+
 @NgModule({
   imports: [
     IonicModule,
@@ -15,6 +18,7 @@ import { ComponentesModule } from '../../shared/componentes/componentes.module';
     FormsModule,
     ExploreContainerComponentModule,
     Tab1PageRoutingModule, 
+    HttpClientModule,  // Añade HttpClientModule aquí
     ComponentesModule
   ],
   declarations: [Tab1Page]

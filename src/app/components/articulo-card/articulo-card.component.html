@@ -1,0 +1,14 @@
+<!-- componentes/articulo-card/articulo-card.component.html -->
+<ion-card>
+    <ion-card-header>
+        <a [href]="articulo.url" target="_blank">{{ articulo.title }}</a>
+    </ion-card-header>
+    <ion-card-content>
+        <p>{{ articulo.description }}</p>
+        <img [src]="articulo.urlToImage" alt="Imagen del artículo" />
+        <div class="button-wrapper">
+            <ion-button color="danger" (click)="mostrarAlertaConfirmacion(articulo)">Borrar de la lista</ion-button>
+        </div>
+    </ion-card-content>
+</ion-card>
+  
