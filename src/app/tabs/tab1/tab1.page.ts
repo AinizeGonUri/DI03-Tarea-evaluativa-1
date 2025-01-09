@@ -1,12 +1,9 @@
-// Archivo que se encarga de la lógica que hay detras del tab1.
-
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ArticulosService } from '../../services/articulos.service';
 import { LecturaService } from '../../services/lectura.service';
 import { Articulo } from '../../interfaces/articulo.model';
 import { AlertController } from '@ionic/angular';
-import { Subscription } from 'rxjs'; 
-import { HttpClient } from '@angular/common/http';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-tab1',
@@ -15,29 +12,23 @@ import { HttpClient } from '@angular/common/http';
 })
 export class Tab1Page implements OnInit, OnDestroy {
   articulos: Articulo[] = [];
+
+  categoriaSeleccionada: string = 'business'; // Valor predeterminado
   private duplicadoSub: Subscription = new Subscription(); // Inicializamos con una instancia vacía
 
   constructor(
     private articulosService: ArticulosService,
     public lecturaService: LecturaService,
-    private alertController: AlertController,
-    private http: HttpClient
+    private alertController: AlertController
   ) {}
 
   ngOnInit() {
-    // carga todos los archivos en cuanto abrimos la aplicación
+    // Carga todos los artículos desde la API
     this.cargarArticulos();
 
+    // Suscripción al servicio de artículos duplicados
     this.duplicadoSub = this.lecturaService.getArticuloDuplicado().subscribe(() => {
       this.mostrarAlertaDuplicado(); // Llama a la función de alerta en caso de que haya algún artículo duplicado
-    });
-
-    // Carga los artículos desde el archivo JSON
-    this.http.get<any>('../../assets/datos/articulos.json').subscribe(data => {
-      this.articulos = data.articles.map((articulo: any) => ({
-        ...articulo,
-        elected: articulo.selected || false,  // Asegura que 'selected' esté inicializado
-      }));
     });
   }
 
@@ -48,26 +39,38 @@ export class Tab1Page implements OnInit, OnDestroy {
     }
   }
 
-  //Método para asegurarnos de que no haya ningún problema, en caso d ehaberlo, nos aparecera el error en la consola
+  // Método para cargar los artículos desde la API
   cargarArticulos() {
-    this.articulosService.getArticulos().subscribe(
+    this.articulosService.getArticulosPorCategoria(this.categoriaSeleccionada).subscribe(
       (data) => {
-        this.articulos = data.articles;
+        console.log('Datos recibidos de la API:', data);
+        // Aquí, accedemos correctamente a la propiedad 'articles'
+        if (data && Array.isArray(data.articles)) {
+          this.articulos = data.articles;
+        } else {
+          console.error('La respuesta de la API no contiene un array de artículos');
+        }
       },
       (error) => {
-        console.error('Error al cargar los artículos:', error);
+        console.error('Error al cargar los artículos desde la API:', error);
       }
     );
   }
 
   // Actualizar el estado de selección de los artículos
   actualizarArticulo(articulo: Articulo) {
+    const articulosEnTab2 = this.lecturaService.getArticulosSeleccionadosValue();
+    
     if (articulo.selected) {
-      // Si el artículo está siendo marcado (checkbox activado), lo agregamos a tab2
-      this.lecturaService.agregarArticulo(articulo);
+      // Verificar si ya existe el artículo en la lista de lectura
+      if (!articulosEnTab2.some(a => a.url === articulo.url)) {
+        console.log('Añadiendo artículo a la lista de lectura:', articulo);
+        this.lecturaService.agregarArticulo(articulo); // Añadir artículo al servicio de lectura
+      }
     } else {
-      // Si el artículo está siendo desmarcado, simplemente desmarcamos el checkbox pero no lo eliminamos de tab2
-      // No hacemos nada aquí, porque queremos que el artículo permanezca en tab2
+      // Si el artículo se desmarca, eliminarlo de la lista
+      console.log('Eliminando artículo de la lista de lectura:', articulo);
+      this.lecturaService.borrarArticulo(articulo); // Eliminar artículo del servicio de lectura
     }
   }
 
@@ -82,8 +85,8 @@ export class Tab1Page implements OnInit, OnDestroy {
     await alert.present();
   }
 
-   // Método para mostrar alerta de confirmación antes de eliminar un artículo
-   async mostrarAlertaConfirmacion(articulo: Articulo) {
+  // Método para mostrar alerta de confirmación antes de eliminar un artículo
+  async mostrarAlertaConfirmacion(articulo: Articulo) {
     const alert = await this.alertController.create({
       header: 'Confirmar',
       message: '¿Estás seguro de que deseas borrar este artículo de la lista?',
@@ -108,11 +111,10 @@ export class Tab1Page implements OnInit, OnDestroy {
     await alert.present();
   }
 
-
   // Método para borrar un artículo de la lista
   borrarDeLista(articulo: Articulo) {
     this.lecturaService.borrarArticulo(articulo); // Llamamos al servicio para borrar
     // También eliminamos el artículo de la lista de 'articulos' de tab1
-    this.articulos = this.articulos.filter(a => a.source.id !== articulo.source.id);
+    this.articulos = this.articulos.filter(a => a.url !== articulo.url);
   }
 }

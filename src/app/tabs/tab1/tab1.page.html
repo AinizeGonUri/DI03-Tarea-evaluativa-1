@@ -13,6 +13,21 @@
     </ion-text>
   </div>
 
+  <ion-segment [(ngModel)]="categoriaSeleccionada" (ionChange)="cargarArticulos()">
+    <ion-segment-button value="business">
+      <ion-label>Business</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="technology">
+      <ion-label>Technology</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="sports">
+      <ion-label>Sports</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="health">
+      <ion-label>Health</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
   <ion-list>
     <ion-item class="card-wrapper" *ngFor="let articulo of articulos">
       <div class="checkbox-wrapper">

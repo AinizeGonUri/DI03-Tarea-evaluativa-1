@@ -18,7 +18,7 @@ export class LecturaService {
 
   // Método para agregar un artículo. Si el artículo ya está en la lista, saltará un modal para avisarnos de que se está duplicando. 
   agregarArticulo(articulo: Articulo) {
-    if (this.articulosSeleccionados.some(a => a.title === articulo.title)) {
+    if (this.articulosSeleccionados.some(a => a.url === articulo.url)) {
       this.articuloDuplicadoSubject.next();
       return; 
     }
@@ -45,7 +45,7 @@ export class LecturaService {
   // Método para borrar un artículo
   borrarArticulo(articulo: Articulo) {
     const articulos = this.articulosSeleccionadosSubject.value;
-    const index = articulos.findIndex(a => a.source.id === articulo.source.id);
+    const index = articulos.findIndex(a => a.url === articulo.url);
     if (index !== -1) {
       articulos.splice(index, 1);  // Eliminar el artículo de la lista
       this.articulosSeleccionadosSubject.next([...articulos]);  // Actualizar el observable
