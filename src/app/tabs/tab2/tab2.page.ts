@@ -3,6 +3,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LecturaService } from '../../services/lectura.service';
 import { Articulo } from '../../interfaces/articulo.model';
+import { StorageService } from '../../services/storage.service';
 
 @Component({
   selector: 'app-tab2',
@@ -10,10 +11,13 @@ import { Articulo } from '../../interfaces/articulo.model';
   styleUrls: ['./tab2.page.scss'],
 })
 export class Tab2Page implements OnInit {
+
   articulosSeleccionados: Articulo[] = [];
+  selectedArticle: any = null;
 
   constructor(
-    private lecturaService: LecturaService
+    private lecturaService: LecturaService,
+    private storageService: StorageService
   ) {}
 
   ngOnInit() {
@@ -21,11 +25,18 @@ export class Tab2Page implements OnInit {
     this.lecturaService.getArticulosSeleccionados().subscribe((articulos: Articulo[]) => {
       this.articulosSeleccionados = articulos;
     });
+
+    this.loadSelectedArticle();
   }
 
   // Método para borrar los artículos que el usuario quiera borrar
   borrarArticulo(articulo: Articulo) {
     this.lecturaService.borrarArticulo(articulo);
+  }
+
+  // Cargar noticia seleccionada desde el almacenamiento
+  async loadSelectedArticle() {
+    this.selectedArticle = await this.storageService.getSelectedArticle();
   }
 }
 

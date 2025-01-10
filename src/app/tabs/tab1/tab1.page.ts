@@ -14,7 +14,7 @@ export class Tab1Page implements OnInit, OnDestroy {
   articulos: Articulo[] = [];
 
   categoriaSeleccionada: string = 'business'; // Valor predeterminado
-  private duplicadoSub: Subscription = new Subscription(); // Inicializamos con una instancia vacía
+  private duplicadoSub: Subscription = new Subscription(); 
 
   constructor(
     private articulosService: ArticulosService,

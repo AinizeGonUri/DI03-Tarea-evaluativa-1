@@ -16,14 +16,14 @@ export class ArticulosService {
   private apiKey = '433e74f3a5f9472eb664d88231ffc323'; 
   private apiUrlBase = 'https://newsapi.org/v2/top-headlines';
 
-  private articulosSeleccionadosSubject = new BehaviorSubject<Articulo[]>([]);  // Se inicia con un array vacío
-  articulosSeleccionados$ = this.articulosSeleccionadosSubject.asObservable(); // Observable para que otros componentes se suscriban
+  private articulosSeleccionadosSubject = new BehaviorSubject<Articulo[]>([]); 
+  articulosSeleccionados$ = this.articulosSeleccionadosSubject.asObservable(); 
   
   constructor(
     private http: HttpClient
   ) { }
 
-  // Método que permite obtener artículos de cualquier categoría
+  // Método para obtener artículos de cualquier categoría
   getArticulosPorCategoria(categoria: string): Observable<ApiResponse> {
     const url = `${this.apiUrlBase}?category=${categoria}&apiKey=${this.apiKey}`;
     return this.http.get<ApiResponse>(url);
@@ -38,7 +38,6 @@ export class ArticulosService {
         this.articulosSeleccionadosSubject.next([...articulos, articulo]);
       }
     } else {
-      // Si el artículo no está seleccionado, lo eliminamos
       this.articulosSeleccionadosSubject.next(articulos.filter(a => a.url !== articulo.url));
     }
   }
